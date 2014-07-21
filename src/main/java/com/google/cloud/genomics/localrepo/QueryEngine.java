@@ -455,4 +455,9 @@ public class QueryEngine {
 
     return searchReads(createQueryDescriptor(request), Predicates.in(readsetIds));
   }
+
+  /* Drew Wilson
+  public SearchVariantsResponse searchVariants (SearchVariantsRequest request) {
+
+  }*/
 }

@@ -1,4 +1,3 @@
-//TEST
 /*
 Copyright 2014 Google Inc. All rights reserved.
 
@@ -16,15 +15,19 @@ limitations under the License.
 */
 package com.google.cloud.genomics.localrepo;
 
+import com.google.cloud.genomics.localrepo.dto.Callset;
 import com.google.cloud.genomics.localrepo.dto.Dataset;
 import com.google.cloud.genomics.localrepo.dto.Readset;
 import com.google.cloud.genomics.localrepo.dto.SearchReadsRequest;
 import com.google.cloud.genomics.localrepo.dto.SearchReadsResponse;
+import com.google.cloud.genomics.localrepo.dto.SearchVariantsRequest;
+import com.google.cloud.genomics.localrepo.dto.SearchVariantsResponse;
 import com.google.cloud.genomics.localrepo.util.Predicates;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -89,4 +92,39 @@ public class Backend {
                 BamFilesReadset::getDatasetId))
         .map(BamFilesReadset::getReadset);
   }
+
+public Optional<Callset> getCallset(String callsetId) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public Stream<Callset> searchCallsets(List<String> datasetIds) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public SearchVariantsResponse searchVariants(SearchVariantsRequest request) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+  /* Drew Wilson
+  public SearchVariantsResponse searchVariants(SearchVariantsRequest request) {
+    return queryEngine.searchVariants(request);
+  }
+
+  public Optional<Callset> getCallset(String callsetId) {
+    return Optional.ofNullable(callsets.get(callsetId)).map(BamFilesReadset::getReadset);
+  }
+
+  public Stream<Callset> searchCallsets(Collection<String> datasetIds) {
+    return callsets.values()
+        .stream()
+        .filter(datasetIds.isEmpty()
+            ? (callset) -> true
+            : Predicates.compose(
+                datasetId -> datasetIds.contains(datasetId),
+                BamFilesReadset::getDatasetId))
+        .map(BamFilesReadset::getReadset);
+  }*/
 }

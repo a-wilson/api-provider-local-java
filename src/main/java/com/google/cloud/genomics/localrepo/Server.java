@@ -127,6 +127,8 @@ public final class Server {
             .register(Datasets.class)
             .register(Reads.class)
             .register(Readsets.class)
+            .register(Variants.class)
+            .register(Callsets.class)
             .register(
                 new AbstractBinder() {
                   @Override protected void configure() {
