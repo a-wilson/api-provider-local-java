@@ -1,3 +1,18 @@
+/*
+Copyright 2014 Google Inc. All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package com.google.cloud.genomics.localrepo;
 
 import java.io.BufferedReader;
@@ -82,27 +97,27 @@ public class VcfFile {
 	
 	private final Supplier<Callset.FileData> fileData = Suppliers.memoize(Suppliers.compose(
 		new Function<VCFReader, Callset.FileData>() {
-		    @Override public Callset.FileData apply(VCFReader reader) {
-		      List<Record> variantRecords = reader.getRecords().stream()
-		          .map(record -> {
-		            return Callset.FileData.Record.create(
-		            	record.getChromosome(),
-		            	record.getPosition(),
-		            	record.getId(),
-		            	record.getReferenceBases(),
-		            	record.getAlternateAlleles(),
-		            	record.getQuality(),
-		            	record.getFilter(),
-		            	record.getInfo());
-		          })
-		          .collect(Collectors.toList());
-		      if (variantRecords.isEmpty()) {
-		        variantRecords.add(Callset.FileData.Record.createDefaultGroup());
-		      }
-		
-		      return Callset.FileData.create(
-		        String.format("file://%s", file.getAbsolutePath()),
-		        Arrays.asList(Callset.FileData.MetaInformation.create(
+	    @Override public Callset.FileData apply(VCFReader reader) {
+	      List<Record> variantRecords = reader.getRecords().stream()
+          .map(record -> {
+            return Callset.FileData.Record.create(
+	            	record.getChromosome(),
+	            	record.getPosition(),
+	            	record.getId(),
+	            	record.getReferenceBases(),
+	            	record.getAlternateAlleles(),
+	            	record.getQuality(),
+	            	record.getFilter(),
+	            	record.getInfo());
+          })
+          .collect(Collectors.toList());
+	      if (variantRecords.isEmpty()) {
+	        variantRecords.add(Callset.FileData.Record.createDefaultGroup());
+	      }
+	
+	      return Callset.FileData.create(
+	        String.format("file://%s", file.getAbsolutePath()),
+	        Arrays.asList(Callset.FileData.MetaInformation.create(
 		        	reader.getFileFormat(),
 		        	reader.getFileDate(),
 		        	reader.getSource(),
@@ -111,7 +126,7 @@ public class VcfFile {
 		        	reader.getInfo(),
 		        	reader.getFilter(),
 		        	reader.getFormat())),
-		        Arrays.asList(Callset.FileData.Header.create(
+	        Arrays.asList(Callset.FileData.Header.create(
 	        		reader.getChrom(),
 	        		reader.getPos(),
 	        		reader.getId(),
@@ -120,8 +135,8 @@ public class VcfFile {
 	        		reader.getQual(),
 	        		reader.getHeaderFilter(),
 	        		reader.getHeaderInfo())),
-		        variantRecords);
-		    }
+	        variantRecords);
+	    }
 		},
 		metaInformation));
  

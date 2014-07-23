@@ -108,7 +108,7 @@ public SearchVariantsResponse searchVariants(SearchVariantsRequest request) {
 	return null;
 }
 
-  /* Drew Wilson
+  /* In progress
   public SearchVariantsResponse searchVariants(SearchVariantsRequest request) {
     return queryEngine.searchVariants(request);
   }
