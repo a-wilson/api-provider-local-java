@@ -18,6 +18,10 @@ package com.google.cloud.genomics.localrepo.util;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import com.google.cloud.genomics.localrepo.dto.Callset.FileData;
+import com.google.cloud.genomics.localrepo.vcf.MetaInformation;
+import com.google.cloud.genomics.localrepo.vcf.VCFReader;
+
 public final class Suppliers {
 
   public static <F, T> Supplier<T> compose(Function<? super F, T> function, Supplier<F> supplier) {
@@ -29,4 +33,10 @@ public final class Suppliers {
   }
 
   private Suppliers() {}
+  
+	public static Supplier compose2(Function<VCFReader, FileData> function,
+      Supplier<MetaInformation> metaInformation) {
+	  // TODO Auto-generated method stub
+	  return null;
+  }
 }

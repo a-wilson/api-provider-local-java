@@ -95,7 +95,9 @@ public class VcfFile {
 			}
 		});
 	
-	private final Supplier<Callset.FileData> fileData = Suppliers.memoize(Suppliers.compose(
+	private final Supplier<Callset.FileData> fileData = Suppliers.memoize(Suppliers.compose2( 
+			// TODO: why can't we override using the normal compose?
+			// TODO: we created a compose2 just for compilations sake
 		new Function<VCFReader, Callset.FileData>() {
 	    @Override public Callset.FileData apply(VCFReader reader) {
 	      List<Record> variantRecords = reader.getRecords().stream()
