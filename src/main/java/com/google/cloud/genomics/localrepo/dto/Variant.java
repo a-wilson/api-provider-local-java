@@ -138,7 +138,6 @@ public class Variant extends DataTransferObject {
   private final List<String> alternateBases;
   private final Map<String, String> info;
   private final List<Calls> calls;
-  
 
   private Variant(
       String id,

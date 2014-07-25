@@ -28,72 +28,81 @@ public class SearchVariantsRequest extends DataTransferObject {
       ReflectiveHashCodeAndEquals.create(SearchVariantsRequest.class);
 
   @JsonCreator public static SearchVariantsRequest create(
-      @JsonProperty("datasetIds") List<String> datasetIds,
-      @JsonProperty("callsetIds") List<String> callsetIds,
-      @JsonProperty("sequenceName") String sequenceName,
-      @JsonProperty("sequenceStart") Long sequenceStart,
-      @JsonProperty("sequenceEnd") Long sequenceEnd,
-      @JsonProperty("pageToken") String pageToken) {
+  		@JsonProperty("datasetId") String datasetId,
+  		@JsonProperty("callsetIds") List<String> callsetIds,
+  		@JsonProperty("sequenceName") String sequenceName,
+  		@JsonProperty("contig") String contig,
+  		@JsonProperty("startPosition") List<String> startPosition,
+  		@JsonProperty("endPosition") List<String> endPosition) {
     return new SearchVariantsRequest(
-        datasetIds,
-        callsetIds,
+    		datasetId,
+    		callsetIds,
         sequenceName,
-        sequenceStart,
-        sequenceEnd,
-        pageToken);
+        contig,
+        startPosition,
+        endPosition);
   }
 
-  private final List<String> datasetIds;
-  private final String pageToken;
+  private final String datasetId;
   private final List<String> callsetIds;
-  private final Long sequenceEnd;
   private final String sequenceName;
-  private final Long sequenceStart;
+  private final String contig;
+  private final List<String> startPosition;
+  private final List<String> endPosition;
 
   private SearchVariantsRequest(
-      List<String> datasetIds,
+      String datasetId,
       List<String> callsetIds,
       String sequenceName,
-      Long sequenceStart,
-      Long sequenceEnd,
-      String pageToken) {
-    this.datasetIds = datasetIds;
+      String contig,
+      List<String> startPosition,
+      List<String> endPosition) {
+    this.datasetId = datasetId;
     this.callsetIds = callsetIds;
     this.sequenceName = sequenceName;
-    this.sequenceStart = sequenceStart;
-    this.sequenceEnd = sequenceEnd;
-    this.pageToken = pageToken;
+    this.contig = contig;
+    this.startPosition = startPosition;
+    this.endPosition = endPosition;
   }
 
   @Override public boolean equals(Object obj) {
     return HASH_CODE_AND_EQUALS.equals(this, obj);
   }
 
-  public List<String> getDatasetIds() {
-    return datasetIds;
+  public String getDatasetId() {
+	  return datasetId;
   }
 
-  public String getPageToken() {
-    return pageToken;
+	public List<String> getCallsetIds() {
+	  return callsetIds;
   }
 
-  public List<String> getCallsetIds() {
-    return callsetIds;
+	public String getSequenceName() {
+	  return sequenceName;
   }
 
-  public Long getSequenceEnd() {
-    return sequenceEnd;
+	/**
+	 * @return the contig
+	 */
+  public String getContig() {
+	  return contig;
   }
 
-  public String getSequenceName() {
-    return sequenceName;
+	/**
+	 * @return the startPosition
+	 */
+  public List<String> getStartPosition() {
+	  return startPosition;
   }
 
-  public Long getSequenceStart() {
-    return sequenceStart;
+	/**
+	 * @return the endPosition
+	 */
+  public List<String> getEndPosition() {
+	  return endPosition;
   }
 
-  @Override public int hashCode() {
+	@Override public int hashCode() {
     return HASH_CODE_AND_EQUALS.hashCode(this);
   }
 }

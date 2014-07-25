@@ -22,8 +22,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -38,15 +40,24 @@ public class Variants extends BaseResource {
 
   @Inject
   public Variants(Backend backend) {
-    this.backend = backend;
+  	this.backend = backend;
+  }
+  
+  @GET
+  @Path("/{callsetId}")
+  public Response get(@PathParam("callsetId") String callsetId) {
+    return toResponse(backend.getCallset(callsetId));
   }
 
   @POST
   @Path("/search")
   public Response search(final SearchVariantsRequest request) {
-    List<String> datasetIds = request.getDatasetIds();
-    List<String> callsetIds = request.getCallsetIds();
-    return datasetIds.isEmpty() || callsetIds.isEmpty()
+    String datasetId = request.getDatasetId();
+    String contig = request.getContig();
+    List<String> startPosition = request.getStartPosition();
+    List<String> endPosition = request.getEndPosition();
+    return datasetId.isEmpty() || contig.isEmpty() 
+    		|| startPosition.isEmpty() || endPosition.isEmpty()
 	      ? Response.ok(backend.searchVariants(request)).build()
 	      : BAD_REQUEST;
   }

@@ -28,16 +28,16 @@ public class SearchVariantsResponse extends DataTransferObject {
       ReflectiveHashCodeAndEquals.create(SearchVariantsResponse.class);
 
   @JsonCreator public static SearchVariantsResponse create(
-      @JsonProperty("reads") List<Read> reads,
+      @JsonProperty("variants") List<Variant> variants,
       @JsonProperty("nextPageToken") String nextPageToken) {
-    return new SearchVariantsResponse(reads, nextPageToken);
+    return new SearchVariantsResponse(variants, nextPageToken);
   }
 
   private final String nextPageToken;
-  private final List<Read> reads;
+  private final List<Variant> variants;
 
-  private SearchVariantsResponse(List<Read> reads, String nextPageToken) {
-    this.reads = reads;
+  private SearchVariantsResponse(List<Variant> variants, String nextPageToken) {
+    this.variants = variants;
     this.nextPageToken = nextPageToken;
   }
 
@@ -49,8 +49,8 @@ public class SearchVariantsResponse extends DataTransferObject {
     return nextPageToken;
   }
 
-  public List<Read> getReads() {
-    return reads;
+  public List<Variant> getVariants() {
+    return variants;
   }
 
   @Override public int hashCode() {
